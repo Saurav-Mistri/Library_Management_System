@@ -1,7 +1,9 @@
 import express from "express";
+import { mongoose } from "mongoose";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 import { PORT, URI } from "./Config/index.js";
 import Router from "./routes/index.js";
-import { mongoose } from "mongoose";
 
 // Create Server
 
