@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { PORT, URI } from "./Config/index.js";
 import Router from "./routes/index.js";
+import Auth from "./routes/auth.js";
 
 // Create Server
 
@@ -18,6 +19,7 @@ app.disable("x-powered-by"); // reduce fingerprinting
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use('/app/auth', Auth);
 
 // DB Connection 
 mongoose.promise = global.Promise;
