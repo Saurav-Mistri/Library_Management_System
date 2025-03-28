@@ -1,3 +1,5 @@
+import { Verify } from "../middleware/verify.js";
+
 const Router = (app) => {
     // home route with the get method and a handler
     app.get("/app", (req, res) => {
@@ -13,6 +15,14 @@ const Router = (app) => {
                 message: err,
             })
         }
+    });
+
+    // session verify route
+    app.get("/app/user", Verify, (req, res) => {
+        res.status(200).json({
+            status: "success",
+            message: "Welcome to your Dashboard!",
+        });
     });
 };
 
