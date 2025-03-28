@@ -1,4 +1,3 @@
-import { config } from "dotenv";
 import User from "../models/User.js"
 import jwt from "jsonwebtoken";
 import { SECRET_ACCESS_TOKEN } from "../Config/index.js";
