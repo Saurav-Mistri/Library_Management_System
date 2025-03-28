@@ -1,4 +1,4 @@
-import { Verify } from "../middleware/verify.js";
+import { Verify, VerifyRole } from "../middleware/verify.js";
 
 const Router = (app) => {
     // home route with the get method and a handler
@@ -22,6 +22,14 @@ const Router = (app) => {
         res.status(200).json({
             status: "success",
             message: "Welcome to your Dashboard!",
+        });
+    });
+
+    // session and user role verify route
+    app.get("/app/user", Verify, VerifyRole, (req, res) => {
+        res.status(200).json({
+            status: "success",
+            message: "Welcome to Site Admin Dashboard!",
         });
     });
 };
