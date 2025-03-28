@@ -1,6 +1,6 @@
 import express from "express";
 import { check } from "express-validator";
-import { Register } from "../controller/auth.js";
+import { Register, Login } from "../controller/auth.js";
 import validate from "../middleware/validate.js";
 
 const router = express.Router();
@@ -30,6 +30,18 @@ router.post(
         .withMessage("The password must be 8 characters long!"),
     validate,
     Register
+);
+
+// Login route -- POST request
+router.post(
+    "/login",
+    check("email")
+        .isEmail()
+        .withMessage("Enter a valid email address!")
+        .normalizeEmail(),
+    check("password").not().isEmpty(),
+    validate,
+    Login
 );
 
 export default router;
