@@ -33,6 +33,7 @@ export async function Register(req, res) {
         const saveNewUser = await newUser.save();
 
         const { role, ...user_data } = saveNewUser._doc;
+        user_data.password = undefined;
         res.status(200).json({
             status: "success",
             data: { user_data },
