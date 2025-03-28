@@ -48,3 +48,30 @@ export async function Verify(req, res, next) {
         });
     }
 }
+
+export function VerifyRole(req, res, next) {
+    try {
+        // We have to access the user object from the request
+        const user = req.user;
+
+        // extract the user role
+        const { role } = user;
+
+        // Verify if the user has no advance privileges
+        // return an unauthorized response
+        if (role !== "admin") {
+            return res.status(401).json({
+                status: "failed",
+                message: "Your are not authorized to view this page.",
+            });
+        }
+        next();
+    } catch (err) {
+        res.status(500).json({
+            status: "error",
+            code: 500,
+            data: [],
+            message: err,
+        });
+    }
+}

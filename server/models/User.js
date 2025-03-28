@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { SECRET_ACCESS_TOKEN } from "../Config";
+import { SECRET_ACCESS_TOKEN } from "../Config/index.js";
 
 const UserSchema = new mongoose.Schema(
     {
