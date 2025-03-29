@@ -23,7 +23,6 @@ export async function Register(req, res) {
 
         // check if user already exists
         const existingUser = await User.findOne({ email });
-        console.log(existingUser);
 
         if (existingUser) {
             return res.status(400).json({
@@ -44,8 +43,6 @@ export async function Register(req, res) {
             message: "Thank you for registering with us. Your account has been successfully registered."
         });
     } catch (err) {
-        console.log(err);
-
         res.status(500).json({
             status: "error",
             code: 500,
@@ -99,8 +96,6 @@ export async function Login(req, res) {
 
         // generate session token for user
         const token = user.generateAccessJWT();
-        console.log('user_data');
-        console.log(token);
 
         // set the token to response header, so that the client sends it back on each subsequent request
         res.cookie("SessionID", token, options);
