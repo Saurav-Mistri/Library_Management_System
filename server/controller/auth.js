@@ -23,6 +23,8 @@ export async function Register(req, res) {
 
         // check if user already exists
         const existingUser = await User.findOne({ email });
+        console.log(existingUser);
+
         if (existingUser) {
             return res.status(400).json({
                 status: "failed",
@@ -42,6 +44,8 @@ export async function Register(req, res) {
             message: "Thank you for registering with us. Your account has been successfully registered."
         });
     } catch (err) {
+        console.log(err);
+
         res.status(500).json({
             status: "error",
             code: 500,
@@ -61,6 +65,7 @@ export async function Login(req, res) {
     try {
         // Verify if the user is exists
         const user = await User.findOne({ email }).select("+password");
+
         if (!user) {
             return res.status(401).json({
                 status: "failed",
@@ -71,9 +76,10 @@ export async function Login(req, res) {
         // if user exists
         // Step - 1 validate password
         const isPasswordValid = await bcrypt.compare(
-            `$(req.body.password)`,
+            req.body.password,
             user.password
         );
+
         if (!isPasswordValid) {
             return res.status(401).json({
                 status: "failed",
@@ -92,7 +98,9 @@ export async function Login(req, res) {
         };
 
         // generate session token for user
-        const token = user.genrateAccessJWU();
+        const token = user.generateAccessJWT();
+        console.log('user_data');
+        console.log(token);
 
         // set the token to response header, so that the client sends it back on each subsequent request
         res.cookie("SessionID", token, options);

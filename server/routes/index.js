@@ -26,7 +26,7 @@ const Router = (app) => {
     });
 
     // session and user role verify route
-    app.get("/app/user", Verify, VerifyRole, (req, res) => {
+    app.get("/app/admin", Verify, VerifyRole, (req, res) => {
         res.status(200).json({
             status: "success",
             message: "Welcome to Site Admin Dashboard!",

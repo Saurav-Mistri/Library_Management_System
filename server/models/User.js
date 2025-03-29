@@ -59,7 +59,7 @@ UserSchema.pre("save", function (next) {
 });
 
 
-UserSchema.methods.generateAccessJWU = function () {
+UserSchema.methods.generateAccessJWT = function () {
     let payload = {
         id: this._id,
     };
